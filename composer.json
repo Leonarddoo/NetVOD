@@ -1,0 +1,13 @@
+{
+  "name": "s3/netvod",
+  "description": "le meilleur streaming video de tout l'iut",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "iutnc\\sae\\netvod\\": "src/classes"
+    }
+  },
+  "require": {
+    "ext-pdo": "*"
+  }
+}
