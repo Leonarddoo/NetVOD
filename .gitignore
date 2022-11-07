@@ -1,4 +1,5 @@
 .idea/
 *.iml
+TD15/vendor/
 vendor/
 composer.phar
