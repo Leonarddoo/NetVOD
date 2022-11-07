@@ -33,12 +33,12 @@ class Dispatcher
     private function renderPage(string $html): void
     {
         echo <<<FORM
-<!doctype html>
-<html lang="fr">
-    <body>
-        $html
-    </body>
-</html>
+        <!doctype html>
+        <html lang="fr">
+            <body>
+                $html
+            </body>
+        </html>
 FORM;
     }
 }
