@@ -4,6 +4,7 @@ namespace iutnc\netvod\auth;
 
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exception\AuthException;
+use iutnc\netvod\User;
 
 class Auth
 {

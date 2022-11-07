@@ -22,7 +22,7 @@ class SigninAction extends Action
                         <h3>S'identifier</h3>
                         <form method="post">
                             <input type="email" id="email" name="email" placeholder="Email" required>
-                            <input type="password" id="password" name="password" placeholder="Mot de passe"  required>
+                            <input type="password" id="password" name="passwd" placeholder="Mot de passe"  required>
                     
                             <button type="submit">Se connecter</button>
                             
@@ -43,15 +43,16 @@ class SigninAction extends Action
                 break;
             case 'POST':
                 try {
-                    $playlists = '';
-                    $user = Auth::authenticate($_POST['email'], $_POST['passwd']);
-                    foreach ($user->getPlaylists() as $playlist) {
-                        if ($playlist instanceof Playlist) {
-                            $playlists .= '<li>' . $playlist->nom . '</li>';
-                        }
-
-                    }
-                    $output .= "Playlists : <ul>$playlists</ul>";
+//                    $playlists = '';
+                    Auth::authenticate($_POST['email'], $_POST['passwd']);
+//                    foreach ($user->getPlaylists() as $playlist) {
+//                        if ($playlist instanceof Playlist) {
+//                            $playlists .= '<li>' . $playlist->nom . '</li>';
+//                        }
+//
+//                    }
+//                    $output .= "Playlists : <ul>$playlists</ul>";
+                    $output .= 'Tu es connecté';
                 } catch (AuthException) {
                     $output .= 'Erreur d\'authentification';
                 }
