@@ -1,8 +1,8 @@
 <?php
 
-namespace iutnc\sae\netvod\action;
+namespace iutnc\netvod\action;
 
-use iutnc\sae\netvod\auth\Auth;
+use iutnc\netvod\auth\Auth;
 
 class AddUserAction extends Action
 {

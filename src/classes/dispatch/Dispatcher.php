@@ -1,13 +1,10 @@
 <?php
 
-namespace iutnc\sae\netvod\dispatch;
+namespace iutnc\netvod\dispatch;
 
-use iutnc\deefy\action\DefaultAction;
-use iutnc\deefy\action\AddPlaylistAction;
-use iutnc\deefy\action\AddPodcastTrack;
-use iutnc\deefy\action\AddUserAction;
-use iutnc\deefy\action\DisplayPlaylistAction;
-use iutnc\deefy\action\SigninAction;
+use iutnc\netvod\action\AddUserAction;
+use iutnc\netvod\action\DefaultAction;
+use iutnc\netvod\action\SigninAction;
 
 class Dispatcher
 {
@@ -21,11 +18,11 @@ class Dispatcher
     public function run(): void
     {
         $action = match ($this->action) {
-            'display-playlist' => new DisplayPlaylistAction(),
+//            'display-playlist' => new DisplayPlaylistAction(),
             'signin' => new SigninAction(),
             'add-user' => new AddUserAction(),
-            'add-playlist' => new AddPlaylistAction(),
-            'add-podcasttrack' => new AddPodcastTrack(),
+//            'add-playlist' => new AddPlaylistAction(),
+//            'add-podcasttrack' => new AddPodcastTrack(),
             default => new DefaultAction(),
         };
 

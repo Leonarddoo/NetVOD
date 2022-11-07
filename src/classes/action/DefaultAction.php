@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\sae\netvod\action;
+namespace iutnc\netvod\action;
 
 class DefaultAction extends Action
 {
