@@ -59,6 +59,7 @@ header img{
     border: 1px solid red;
     border-radius: 10px;
     color: white;
+    border-color: red;
 }
 
 .auth-box button:hover{
