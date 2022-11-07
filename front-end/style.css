@@ -31,9 +31,11 @@ header img{
 
 .auth-box{
     display: block;
-    margin: 5% auto 0 auto;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
     width: 35%;
-    background: rgba(0, 0, 0, .8)
+    background: rgba(0, 0, 0, .8);
 }
 
 .container{
@@ -44,12 +46,13 @@ header img{
     padding-top: 10%;
     margin-bottom: 10%;
     color: white;
+    text-align: left;
 }
 
 .auth-box input{
     display: flex;
     height: 45px;
-    width: 100%;
+    width: 95%;
     margin-bottom: 5%;
     background-color: #333;
     color: white;
@@ -80,6 +83,7 @@ header img{
     text-align: right;
     padding-bottom: 10%;
     color: gray;
+    font-size: 14px;
 }
 
 .auth-box a{
