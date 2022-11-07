@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\sae\netvod\db;
+namespace iutnc\netvod\db;
 
 use PDO;
 

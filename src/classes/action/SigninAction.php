@@ -1,9 +1,9 @@
 <?php
 
-namespace iutnc\sae\netvod\action;
+namespace iutnc\netvod\action;
 
-use iutnc\sae\netvod\auth\Auth;
-use iutnc\sae\netvod\exception\AuthException;
+use iutnc\netvod\auth\Auth;
+use iutnc\netvod\exception\AuthException;
 
 class SigninAction extends Action
 {

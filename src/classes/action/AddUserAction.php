@@ -1,8 +1,8 @@
 <?php
 
-namespace iutnc\sae\netvod\action;
+namespace iutnc\netvod\action;
 
-use iutnc\sae\netvod\auth\Auth;
+use iutnc\netvod\auth\Auth;
 
 class AddUserAction extends Action
 {
@@ -24,11 +24,18 @@ class AddUserAction extends Action
                     <label>Mot de passe : 
                         <input name="passwd" type="password"> 
                     </label>
-                    <button name="submit">Connexion</button>
+                    <label>Répéter le mot de passe : 
+                        <input name="repeat" type="password">
+                    </label>
+                    <button name="submit">Inscription</button>
                 </form>';
                 break;
             case 'POST':
-                $result .= Auth::register($_POST['email'], $_POST['passwd']) ? 'Utilisateur enregistré' : 'Erreur d\'enregistrement';
+                if ($_POST['passwd'] === $_POST['repeat']) {
+                    $result .= Auth::register($_POST['email'], $_POST['passwd']) ? 'Utilisateur enregistré' : 'Erreur d\'enregistrement';
+                } else {
+                    $result .= 'Les deux champs de mot de passe ne correspondent pas';
+                }
                 break;
         }
         return $result;
