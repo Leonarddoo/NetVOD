@@ -47,7 +47,7 @@ class Auth
 
             $statement->execute();
 
-            $alreadyEmail = $statement->fetch()[0] == 0;
+            $alreadyEmail = $statement->fetch()[0] === 0;
 
             if ($length and $alreadyEmail) {
                 $hash = password_hash($passwd, PASSWORD_DEFAULT, ['cost' => 12]);
