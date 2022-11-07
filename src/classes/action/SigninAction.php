@@ -18,16 +18,28 @@ class SigninAction extends Action
         switch ($this->http_method) {
             case 'GET':
                 $output .= <<<FORM
-                <form method="post" action="?action=signin">
-                    <label>Email : 
-                        <input type="email" name="email">
-                    </label>
-                    <label>Mot de passe : 
-                        <input type="password" name="passwd">
-                    </label>
-                    <button type="submit">Connexion</button>
-                </form>
-                FORM;
+                    <div class="box">
+                        <h3>S'identifier</h3>
+                        <form method="post">
+                            <input type="email" id="email" name="email" placeholder="Email" required>
+                            <input type="password" id="password" name="password" placeholder="Mot de passe"  required>
+                    
+                            <button type="submit">Se connecter</button>
+                            
+                            <p>Vous n'avez pas de compte ? <a href="?action=add-user">Inscrivez-vous</a></p>
+                        </form>
+                    </div>
+                    FORM;
+//                <form method="post" action="?action=signin">
+//                    <label>Email :
+//                        <input type="email" name="email">
+//                    </label>
+//                    <label>Mot de passe :
+//                        <input type="password" name="passwd">
+//                    </label>
+//                    <button type="submit">Connexion</button>
+//                </form>
+//                FORM;
                 break;
             case 'POST':
                 try {
