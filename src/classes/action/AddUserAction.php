@@ -27,7 +27,7 @@ class AddUserAction extends Action
                     <label>Répéter le mot de passe : 
                         <input name="repeat" type="password">
                     </label>
-                    <button name="submit">Connexion</button>
+                    <button name="submit">Inscription</button>
                 </form>';
                 break;
             case 'POST':
