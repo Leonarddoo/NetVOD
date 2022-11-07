@@ -12,7 +12,7 @@ class Dispatcher
 
     public function __construct()
     {
-        $this->action = $_GET['action'];
+        $this->action = $_GET['action'] ?? '';
     }
 
     public function run(): void
