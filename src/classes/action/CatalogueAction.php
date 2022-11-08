@@ -1,9 +1,10 @@
 <?php
 
-namespace classes\action;
+namespace iutnc\netvod\action;
 
 use iutnc\netvod\action\Action;
 use iutnc\netvod\auth\Auth;
+use iutnc\netvod\db\ConnectionFactory;
 
 class CatalogueAction extends Action
 {
@@ -18,18 +19,25 @@ class CatalogueAction extends Action
         $output = '';
         switch ($this->http_method) {
             case 'GET':
+                $PDO = ConnectionFactory::makeConnection();
 
-                // TODO
-                $output .= <<<FORM
-                <form method="post" action="?action=news&id=1">
-                </form>
+                $statement = $PDO->prepare('SELECT id,titre,img FROM serie');
+                $statement->execute();
 
-                FORM;
-                break;
+                $output .= '<ul>';
+                while ($data=$statement->fetch()) {
+                    $output .= "<li>{$data['titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></li>";
+                }
+                $output .= '</ul>';
+
+//                $ep_statement = $PDO->prepare('SELECT episode.titre ep_titre, s.titre s_titre FROM episode INNER JOIN serie s on episode.serie_id = s.id');
+//                $ep_statement->execute();
+//
+//                while ($data=$ep_statement->fetch()) {
+//                    $output .= "<div>Episode : {$data['ep_titre']}</div>";
+//                }
+//                break;
             case 'POST':
-                $playlists = '';
-
-                // TODO
 
                 break;
         }

@@ -1,6 +1,6 @@
 * {
     margin: 0;
-    padding: 0;
+    /*padding: 0;*/
     font-family: Arial, sans-serif;
 }
 
@@ -20,6 +20,10 @@ body::after {
     inset: 0;
     background-color: black;
     opacity: .6;
+}
+
+img {
+    display: block;
 }
 
 header img {

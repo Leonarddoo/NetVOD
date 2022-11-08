@@ -16,7 +16,7 @@ class ConnectionFactory
     public static function makeConnection(): PDO
     {
         $config = static::$config_file;
-        return new PDO("{$config['driver']}:host={$config['host']};dbname={$config['database']}", $config['username'], $config['password']);
+        return new PDO("{$config['driver']}:host={$config['host']};dbname={$config['database']};charset=utf8", $config['username'], $config['password']);
     }
 
 }
