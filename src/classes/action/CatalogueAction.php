@@ -26,7 +26,7 @@ class CatalogueAction extends Action
 
                 $output .= '<ul>';
                 while ($data=$statement->fetch()) {
-                    $output .= "<li>{$data['titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></li>";
+                    $output .= "<li><a href='?action=serie&id={$data['id']}'>{$data['titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></a></li>";
                 }
                 $output .= '</ul>';
 

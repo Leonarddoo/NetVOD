@@ -6,6 +6,7 @@ use iutnc\netvod\action\AddUserAction;
 use iutnc\netvod\action\CatalogueAction;
 use iutnc\netvod\action\DefaultAction;
 use iutnc\netvod\action\HomeAction;
+use iutnc\netvod\action\SerieAction;
 use iutnc\netvod\action\SigninAction;
 
 class Dispatcher
@@ -27,6 +28,7 @@ class Dispatcher
 //            'add-playlist' => new AddPlaylistAction(),
 //            'add-podcasttrack' => new AddPodcastTrack(),
             'catalogue' => new CatalogueAction(),
+            'serie' => new SerieAction(),
             default => new DefaultAction()
         };
 
