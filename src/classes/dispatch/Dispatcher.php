@@ -47,7 +47,7 @@ class Dispatcher
     </head>
     <body>
         <header>
-            <img src="img/logo.png" alt="logo">
+            <a href="?"><img src="img/logo.png" alt="logo"></a>
         </header>
         $html
     </body>
