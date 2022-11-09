@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod;
 
+use Exception;
 use PDOStatement;
 
 class Utils
@@ -14,5 +15,10 @@ class Utils
             $result .= $before.$data[$key].$after;
         }
         return $result.$end;
+    }
+
+    public static function linked_button(string $text, string $value, $method='get', $name='action'): string
+    {
+        return "<form method='$method'><button name='$name' value='$value' type='submit'>$text</button></form>";
     }
 }
