@@ -33,7 +33,7 @@ class EpisodeAction extends Action
                     $output .="<img src='{$episode['img']}' alt=\"Une image correspond à l'episode\">";
 
                     $output .= "<div> Résumé : <p>{$episode['res']}</p></div>";
-                    $output .= "<div> Durée: <p>{$episode['dur']}</p></div>";
+                    $output .= "<div> Durée: <p>{$episode['dur']} min</p></div>";
 
                     $watch_statement = $PDO->prepare('INSERT INTO userWatch VALUES (?, ?, 0)');//TODO
 
