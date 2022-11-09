@@ -41,17 +41,17 @@ class SerieAction extends Action
                 $output .= "<div>Année de sortie : {$serie['year']}</div>";
                 $output .= "<div>Date d'ajout : {$serie['date']}</div>";
 
-                $ep_statement = $PDO->prepare('SELECT e.titre title, numero, duree, resume FROM serie INNER JOIN episode e on serie.id = e.serie_id WHERE serie.id = ? ORDER BY numero');
+                $ep_statement = $PDO->prepare('SELECT e.titre title, numero, duree, resume, e.img FROM serie INNER JOIN episode e on serie.id = e.serie_id WHERE serie.id = ? ORDER BY numero');
                 $ep_statement->bindParam(1,$id);
                 $ep_statement->execute();
 
                 $output .= '<ul>';
-                while ($serie=$ep_statement->fetch()) {
+                while ($ep=$ep_statement->fetch()) {
                     $output .= '<li>';
 
-                    $output .= "Episode n° {$serie['numero']} : {$serie['title']}, durée : {$serie['duree']}";
-                    $output .= "<p>Résumé : {$serie['resume']}</p>";
-                    $output .= "<img src='{$serie['img']}' alt=\"Une image correspond à l'episode\">";
+                    $output .= "Episode n° {$ep['numero']} : {$ep['title']}, durée : {$ep['duree']}";
+                    $output .= "Résumé : <p>{$ep['resume']}</p>";
+                    $output .= "<img src='{$ep['img']}' alt=\"Une image correspond à l'episode\">";
 
                     $output .= '</li>';
                 }
