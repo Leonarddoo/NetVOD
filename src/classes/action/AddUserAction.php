@@ -17,10 +17,13 @@ class AddUserAction extends Action
 
         switch ($this->http_method) {
             case 'GET':
-                $result .= <<<FORM
+                if (Auth::connected()) {
+                    header('Location: ?');
+                } else {
+                    $result .= <<<FORM
 <div class="box">
     <h3>S'enregister</h3>
-    <form method="post">
+    <form class="auth" method="post">
         <input type="email" id="email" name="email" placeholder="Email" required>
         <input type="password" id="password" name="passwd" placeholder="Mot de passe"  required>
         <input type="password" id="v-password" name="check-passwd" placeholder="Répéter le mot de passe"  required>
@@ -30,6 +33,7 @@ class AddUserAction extends Action
     </form>
 </div>
 FORM;
+                }
 //<form method="post" action="?action=add-user">
 //    <label>Email :
 //        <input name="email" type="email">

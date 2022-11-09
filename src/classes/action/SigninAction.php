@@ -4,6 +4,7 @@ namespace iutnc\netvod\action;
 
 use iutnc\netvod\auth\Auth;
 use iutnc\netvod\exception\AuthException;
+use iutnc\netvod\Utils;
 
 class SigninAction extends Action
 {
@@ -17,10 +18,13 @@ class SigninAction extends Action
         $output = '';
         switch ($this->http_method) {
             case 'GET':
-                $output .= <<<FORM
+                if (Auth::connected()) {
+                    header('Location: ?');
+                } else {
+                    $output .= <<<FORM
                     <div class="box">
                         <h3>S'identifier</h3>
-                        <form method="post">
+                        <form class="auth" method="post">
                             <input type="email" id="email" name="email" placeholder="Email" required>
                             <input type="password" id="password" name="passwd" placeholder="Mot de passe"  required>
                     
@@ -30,6 +34,7 @@ class SigninAction extends Action
                         </form>
                     </div>
                     FORM;
+                }
 //                <form method="post" action="?action=signin">
 //                    <label>Email :
 //                        <input type="email" name="email">
@@ -49,7 +54,6 @@ class SigninAction extends Action
 //                        if ($playlist instanceof Playlist) {
 //                            $playlists .= '<li>' . $playlist->nom . '</li>';
 //                        }
-//
 //                    }
 //                    $output .= "Playlists : <ul>$playlists</ul>";
                     $output .= 'Tu es connecté';
