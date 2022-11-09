@@ -21,7 +21,7 @@ class EpisodeAction extends Action
 
 
                 if($episode = $episode_statement->fetch()){
-                    $output .="<h1><div> Episode n° {$episode['i']}</div></h1>";
+                    $output .="<h1><div> Episode n° {$episode['num']}</div></h1>";
                     $output .= "<h2>{$episode['title']}</h2>";
 
                     $output .= "<div></div><video controls src='video/{$episode['fil']}'></video></div>";
