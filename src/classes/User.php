@@ -2,6 +2,8 @@
 
 namespace iutnc\netvod;
 
+use Exception;
+use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exception\InvalidPropertyNameException;
 
@@ -64,4 +66,10 @@ class User
         return $statement->fetch()['id'];
     }
 
+    public static function sessionUser(): User{
+        if (Auth::connected()) {
+            return unserialize($_SESSION['user']);
+        }
+        throw new Exception('Pas d\'utilisateur connecté');
+    }
 }
