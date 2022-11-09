@@ -28,7 +28,7 @@ class SerieAction extends Action
             $public_statement->execute();
 
             if ($serie = $serie_statement->fetch()) { // si la serie dont l'id est $id existe
-                $output .= "<h3>{$serie['title']}</h3>";
+                $output .= "<h2>{$serie['title']}</h2>";
 
                 $output .= "<div>Nombre d'episodes : {$serie['nb_ep']}</div>";
 
@@ -47,19 +47,20 @@ class SerieAction extends Action
                     $output .= Utils::linked_button('Ajouter à mes préférences', 'true', 'post', 'like');
                 }
 
-                $ep_statement = $PDO->prepare('SELECT e.titre title, numero, duree, resume, e.img FROM serie INNER JOIN episode e on serie.id = e.serie_id WHERE serie.id = ? ORDER BY numero');
+                $ep_statement = $PDO->prepare('SELECT e.id id, e.titre title, numero, duree, resume, e.img FROM serie INNER JOIN episode e on serie.id = e.serie_id WHERE serie.id = ? ORDER BY numero');
                 $ep_statement->bindParam(1, $id);
                 $ep_statement->execute();
 
                 $output .= '<ul>';
                 while ($ep = $ep_statement->fetch()) {
-                    $output .= '<li>';
+                    $output .= "<li><a href='?action=episode&id={$ep['id']}'>";
 
-                    $output .= "Episode n° {$ep['numero']} : {$ep['title']}, durée : {$ep['duree']}";
+
+                    $output .= "<h3>Episode n° {$ep['numero']} : {$ep['title']}, durée : {$ep['duree']}</h3>";
                     $output .= "<h4>Résumé : </h4><p>{$ep['resume']}</p>";
                     $output .= "<img src='{$ep['img']}' alt=\"Une image correspond à l'episode\">";
 
-                    $output .= '</li>';
+                    $output .= '</a></li>';
                 }
                 $output .= '</ul>';
 
