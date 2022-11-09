@@ -28,27 +28,6 @@ class User
         $this->role = $role;
     }
 
-//    public function getPlaylists(): array
-//    {
-//        $db = ConnectionFactory::makeConnection();
-//        $statement = $db->prepare('SELECT playlist.id, nom FROM playlist
-//                INNER JOIN user2playlist ON playlist.id = user2playlist.id_pl
-//                INNER JOIN User on user2playlist.id_user = User.id
-//                WHERE email = :email and passwd = :passwd and role = :role');
-//
-//        $statement->bindParam(':email', $this->email);
-//        $statement->bindParam(':passwd', $this->passwd);
-//        $statement->bindParam(':role', $this->role);
-//
-//        $statement->execute();
-//
-//        $res = [];
-//        while ($line = $statement->fetch()) {
-//            $res[] = new Playlist($line['nom']);
-//        }
-//        return $res;
-//    }
-
     public function __get(string $attr): mixed {
         if ($attr === 'id') return $this->id();
         if (property_exists($this, $attr)) return $this->$attr;
@@ -67,9 +46,6 @@ class User
     }
 
     public static function sessionUser(): User{
-        if (Auth::connected()) {
-            return unserialize($_SESSION['user']);
-        }
-        throw new Exception('Pas d\'utilisateur connecté');
+        return unserialize($_SESSION['user']);
     }
 }
