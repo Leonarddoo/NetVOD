@@ -21,4 +21,9 @@ class Utils
     {
         return "<form method='$method'><button name='$name' value='$value' type='submit'>$text</button></form>";
     }
+
+    public static function redirect($url='?'): void
+    {
+        header("Location: $url");
+    }
 }

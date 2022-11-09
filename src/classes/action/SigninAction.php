@@ -19,7 +19,7 @@ class SigninAction extends Action
         switch ($this->http_method) {
             case 'GET':
                 if (Auth::connected()) {
-                    header('Location: ?');
+                    Utils::redirect();
                 } else {
                     $output .= <<<FORM
                     <div class="box">
@@ -48,15 +48,8 @@ class SigninAction extends Action
                 break;
             case 'POST':
                 try {
-//                    $playlists = '';
                     Auth::authenticate($_POST['email'], $_POST['passwd']);
-//                    foreach ($user->getPlaylists() as $playlist) {
-//                        if ($playlist instanceof Playlist) {
-//                            $playlists .= '<li>' . $playlist->nom . '</li>';
-//                        }
-//                    }
-//                    $output .= "Playlists : <ul>$playlists</ul>";
-                    $output .= 'Tu es connecté';
+                    Utils::redirect();
                 } catch (AuthException) {
                     $output .= 'Erreur d\'authentification';
                 }

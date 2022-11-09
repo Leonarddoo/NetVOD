@@ -3,6 +3,7 @@
 namespace iutnc\netvod\action;
 
 use iutnc\netvod\auth\Auth;
+use iutnc\netvod\Utils;
 
 class AddUserAction extends Action
 {
@@ -18,7 +19,7 @@ class AddUserAction extends Action
         switch ($this->http_method) {
             case 'GET':
                 if (Auth::connected()) {
-                    header('Location: ?');
+                    Utils::redirect();
                 } else {
                     $result .= <<<FORM
 <div class="box">
