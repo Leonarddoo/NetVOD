@@ -21,11 +21,13 @@ class EpisodeAction extends Action
 
 
                 if($episode = $episode_statement->fetch()){
-                    $output .= "<h3>{$episode['title']}</h3>";
+                    $output .="<h1><div> Episode n° {$episode['i']}</div></h1>";
+                    $output .= "<h2>{$episode['title']}</h2>";
+
+                    $output .= "<div></div><video controls src='video/{$episode['fil']}'></video></div>";
+
 
                     $output .="<img src='{$episode['img']}' alt=\"Une image correspond à l'episode\">";
-                    $output .="<div> Episode n° {$episode['i']}</div>";
-                    $output .="<div> {$episode['title']}</div>";
 
                     $output .= "<div> Résumé : <p>{$episode['res']}</p></div>";
                     $output .= "<div> Durée: <p>{$episode['dur']}</p></div>";
