@@ -27,7 +27,7 @@ class SerieAction extends Action
             $public_statement->execute();
 
             if ($serie = $serie_statement->fetch()) { // si la serie dont l'id est $id existe
-                $output .= "<h4>{$serie['title']}</h4>";
+                $output .= "<h3>{$serie['title']}</h3>";
 
                 $output .= "<div>Nombre d'episodes : {$serie['nb_ep']}</div>";
 
@@ -50,7 +50,7 @@ class SerieAction extends Action
                     $output .= '<li>';
 
                     $output .= "Episode n° {$ep['numero']} : {$ep['title']}, durée : {$ep['duree']}";
-                    $output .= "Résumé : <p>{$ep['resume']}</p>";
+                    $output .= "<h4>Résumé : </h4><p>{$ep['resume']}</p>";
                     $output .= "<img src='{$ep['img']}' alt=\"Une image correspond à l'episode\">";
 
                     $output .= '</li>';
