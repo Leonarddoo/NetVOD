@@ -20,16 +20,22 @@ class AccueilAction extends Action
         switch ($this->http_method) {
             case 'GET':
                 $PDO = ConnectionFactory::makeConnection();
-                $statement = $PDO->prepare('SELECT * FROM userPreference INNER JOIN serie ON id_serie=serie.id WHERE id_user = ?');
+                $preference_statement = $PDO->prepare('SELECT * FROM userPreference INNER JOIN serie ON id_serie=serie.id WHERE id_user = ?');
+                $visionnage_statement = $PDO->prepare('SELECT * FROM userVisionnage INNER JOIN serie ON id_serie=serie.id WHERE id_user = ?');
 
                 $user = unserialize($_SESSION['user']);
                 $id_user = $user->id;
 
-                $statement->bindParam(1, $id_user);
-                $statement->execute();
+                $preference_statement->bindParam(1, $id_user);
+                $visionnage_statement->bindParam(1, $id_user);
+                $preference_statement->execute();
+                $visionnage_statement->execute();
 
                 $output .= '<ul>';
-                while ($data=$statement->fetch()) {
+                while ($data=$preference_statement->fetch()) {
+                    $output .= "<li>{$data['titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></li>";
+                }
+                while ($data=$visionnage_statement->fetch()) {
                     $output .= "<li>{$data['titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></li>";
                 }
                 $output .= '</ul>';
