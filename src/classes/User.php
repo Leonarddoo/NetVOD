@@ -48,8 +48,20 @@ class User
 //    }
 
     public function __get(string $attr): mixed {
+        if ($attr === 'id') return $this->id();
         if (property_exists($this, $attr)) return $this->$attr;
         throw new InvalidPropertyNameException("$attr isn't attribute of this instance of class");
+    }
+
+    private function id(): int
+    {
+        $PDO = ConnectionFactory::makeConnection();
+
+        $statement = $PDO->prepare('SELECT id FROM User WHERE email = ?');
+        $statement->bindParam(1, $this->email);
+        $statement->execute();
+
+        return $statement->fetch()['id'];
     }
 
 }
