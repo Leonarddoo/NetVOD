@@ -64,6 +64,11 @@ class Auth
         return false;
     }
 
+    public static function connected(): bool
+    {
+        return isset($_SESSION['user']);
+    }
+
 //    public static function ownPlaylist(int $id): bool
 //    {
 //
