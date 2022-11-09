@@ -68,10 +68,11 @@ class SerieAction extends Action
                         if ($_POST['like'] === 'true') {
                             $like_statement = $PDO->prepare('INSERT INTO userPreference VALUES (?, ?)');
 
-                            $id_user = unserialize($_SESSION['USER']);
+                            $user = unserialize($_SESSION['user']);
+                            $id_user = $user->id;
 
                             $like_statement->bindParam(1, $id_user);
-                            $like_statement->bindParam(1, $id);
+                            $like_statement->bindParam(2, $id);
 
                             $like_statement->execute();
                         }
