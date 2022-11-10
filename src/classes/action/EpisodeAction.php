@@ -6,6 +6,7 @@ use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\User;
 use iutnc\netvod\Utils;
+use PDOException;
 
 class EpisodeAction extends Action
 {
@@ -35,13 +36,21 @@ class EpisodeAction extends Action
                     $output .= "<div> Résumé : <p>{$episode['res']}</p></div>";
                     $output .= "<div> Durée: <p>{$episode['dur']} min</p></div>";
 
-                    $watch_statement = $PDO->prepare('INSERT INTO userWatch VALUES (?, ?, 0)');//TODO
-
                     $id_user = User::sessionUser()->id;
+                    $ep = $episode['idse'];
+
+                    $watch_statement = $PDO->prepare('INSERT INTO userWatch VALUES (?, ?)');//TODO
 
                     $watch_statement->bindParam(1, $id_user);
-                    $watch_statement->bindParam(2,$episode['idse']);
-                    //$watch_statement->execute();//TODO
+                    $watch_statement->bindParam(2, $ep);
+
+                    try {
+                        $watch_statement->execute();
+                    } catch (PDOException $e) {
+                        if ($e->getCode() !== '23000') {
+                            throw $e;
+                        }
+                    }
 
 
 
