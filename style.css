@@ -1,30 +1,15 @@
+:root{
+    --navbar-background-color: #f2f2f2;
+    --navbar-separator-color: #ececec;
+    --navbar-icon-color: black;
+    --navbar-text-color: black;
+}
+
 * {
     margin: 0;
-    /*padding: 0;*/
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-}
-
-body {
-    height: 100vh;
-    width: 100%;
-    background-image: url("img/bg.jpg");
-    position: relative;
-    isolation: isolate;
-    color: white;
-}
-
-body::after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    background-color: black;
-    opacity: .6;
-}
-
-img {
-    display: block;
-    width: 25%;
 }
 
 a {
@@ -102,4 +87,120 @@ form.auth p {
     padding-top: 10%;
     color: white;
     text-align: center;
+}
+
+nav{
+    width: 100%;
+    background: black;
+    height: 100px;
+    display: flex;
+}
+
+nav img{
+    position: absolute;
+}
+
+nav ul{
+    display: flex;
+    margin: auto;
+    list-style: none;
+}
+
+nav li a{
+    width: 100px;
+    display: block;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+.swiper{
+    width: 950px;
+}
+
+.title-slide h3{
+    text-align: center;
+    color: white;
+    margin-top: 5%;
+}
+
+section{
+    position: relative;
+    height: 300px;
+    width: 1100px;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+section .card .image{
+    height: 200px;
+}
+
+section .card .image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    border-radius: 20px;
+}
+
+.card{
+    position: relative;
+    background-color: black;
+    border-radius: 20px;
+}
+
+.card::before{
+    content: "";
+    position: absolute;
+    height: 55%;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+}
+
+.card .card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+}
+
+.card .icons{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.card .icons i{
+    color: red;
+    opacity: 0.6;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.card .icons i:hover{
+    opacity: 1;
+}
+
+.card .text {
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    color: white;
+}
+
+.text .title{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+section .swiper-button-next, section .swiper-button-prev{
+    color: white;
+    transition: all 0.3s ease;
+}
+
+section .swiper-button-next:hover, section .swiper-button-prev:hover{
+    color: red;
+    transition: all 0.3s ease;
 }
