@@ -39,6 +39,8 @@ class EpisodeAction extends Action
                 $watch_statement->bindParam('user', $id_user);
                 $watch_statement->bindParam('serie', $serie);
                 $watch_statement->bindParam('episode', $id);
+
+                $watch_statement->execute();
             }
         }
         return $output;
