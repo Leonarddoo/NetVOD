@@ -57,7 +57,7 @@ class SerieAction extends Action
                     $output .= "<li><a href='?action=episode&id={$ep['id']}'>";
 
 
-                    $output .= "<h3>Episode n° {$ep['numero']} : {$ep['title']}, durée : {$ep['duree']}</h3>";
+                    $output .= "<h3>Episode n° {$ep['numero']} : {$ep['title']}, durée : {$ep['duree']} min</h3>";
                     $output .= "<h4>Résumé : </h4><p>{$ep['resume']}</p>";
                     $output .= "<img src='{$ep['img']}' alt=\"Une image correspond à l'episode\">";
 
