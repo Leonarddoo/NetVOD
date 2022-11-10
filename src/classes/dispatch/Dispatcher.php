@@ -8,6 +8,7 @@ use iutnc\netvod\action\DefaultAction;
 use iutnc\netvod\action\EpisodeAction;
 use iutnc\netvod\action\DisconnectAction;
 use iutnc\netvod\action\HomeAction;
+use iutnc\netvod\action\ProfilAction;
 use iutnc\netvod\action\SerieAction;
 use iutnc\netvod\action\SigninAction;
 
@@ -33,6 +34,7 @@ class Dispatcher
             'serie' => new SerieAction(),
             'episode' => new EpisodeAction(),
             'disconnect' => new DisconnectAction(),
+            'profil'=> new ProfilAction(),
             default => new DefaultAction()
         };
 
