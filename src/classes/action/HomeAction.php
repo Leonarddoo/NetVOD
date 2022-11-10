@@ -13,6 +13,7 @@ class HomeAction extends Action
     {
         $output = '';
         if (isset($_SESSION['user'])) {
+            $output .= Utils::linked_button('Catalogue', 'catalogue');
             $output .= Utils::linked_button('Déconnexion', 'disconnect');
 
             $PDO = ConnectionFactory::makeConnection();
@@ -28,7 +29,7 @@ class HomeAction extends Action
             $visionnage_statement->bindParam(1, $id_user);
             $visionnage_statement->execute();
 
-            $output .= '<ul>Préférences : ';
+            $output .= 'Préférences : <ul>';
             while ($data=$preference_statement->fetch()) {
                 $output .= "<li><a href='?action=serie&id={$data['id_serie']}'>{$data['titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></a></li>";
             }
