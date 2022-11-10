@@ -54,16 +54,7 @@ class SigninAction extends Action
                     </div>
                     FORM;
                 }
-//                <form method="post" action="?action=signin">
-//                    <label>Email :
-//                        <input type="email" name="email">
-//                    </label>
-//                    <label>Mot de passe :
-//                        <input type="password" name="passwd">
-//                    </label>
-//                    <button type="submit">Connexion</button>
-//                </form>
-//                FORM;
+
                 break;
             case 'POST':
                 try {

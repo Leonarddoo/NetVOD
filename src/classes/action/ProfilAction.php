@@ -56,8 +56,9 @@ class ProfilAction extends Action
                     }
 
 
+
                     $result .= <<<FORM
-<style>
+<style xmlns="http://www.w3.org/1999/html">
     body{
         height: 100vh;
         width: 100%;
@@ -79,8 +80,8 @@ class ProfilAction extends Action
 <div class="box">
     <h3>Gestion du Profil</h3>
     <form class="auth" method="post">
-        <input type="nom" id="nom" name="nom" placeholder="Nom" required>
-        <input type="prenom" id="prenom" name="prenom" placeholder="prenom"  required>
+        <input type="text" id="nom" name="nom" placeholder="Nom" required>$nom =</input>
+        <input type="text" id="prenom" name="prenom" placeholder="prenom"  required>$prenom</input>
         <div>Genre Préféré :  
             <select name="genrePref" id="genrePref">
                 <option value="0">-Choisis une option-</option>
@@ -88,8 +89,6 @@ class ProfilAction extends Action
             </select>
         </div>
         <button type="submit">Enregistrer</button>
-    
-      
     </form>
 </div>
 FORM;

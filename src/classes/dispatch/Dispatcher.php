@@ -25,12 +25,11 @@ class Dispatcher
     public function run(): void
     {
         $action = match ($this->action) {
-//            'display-playlist' => new DisplayPlaylistAction(),
+
             null => new HomeAction(),
             'signin' => new SigninAction(),
             'add-user' => new AddUserAction(),
-//            'add-playlist' => new AddPlaylistAction(),
-//            'add-podcasttrack' => new AddPodcastTrack(),
+
             'catalogue' => new CatalogueAction(),
             'serie' => new SerieAction(),
             'episode' => new EpisodeAction(),

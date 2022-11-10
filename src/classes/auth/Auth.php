@@ -69,31 +69,5 @@ class Auth
         return isset($_SESSION['user']);
     }
 
-//    public static function ownPlaylist(int $id): bool
-//    {
-//
-//        if (isset($_SESSION['user']) and filter_var($id, FILTER_VALIDATE_INT)) {
-//            /** @var User $user */
-//            $user = unserialize($_SESSION['user']);
-//            if ($user->role === User::ADMIN) {
-//                return true;
-//            } else {
-//                $email = $user->email;
-//
-//                $PDO = ConnectionFactory::makeConnection();
-//                $statement = $PDO->prepare('SELECT * FROM user2playlist
-//                INNER JOIN User u on user2playlist.id_user = u.id
-//                WHERE email = ?');
-//                $statement->bindParam(1, $email);
-//                $statement->execute();
-//
-//                while ($data = $statement->fetch()) {
-//                    if ($data['id_pl'] === $id) {
-//                        return true;
-//                    }
-//                }
-//            }
-//        }
-//        return false;
-//    }
+
 }
