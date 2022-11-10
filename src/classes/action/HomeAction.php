@@ -19,7 +19,7 @@ class HomeAction extends Action
             $PDO = ConnectionFactory::makeConnection();
 
             $preference_statement = $PDO->prepare('SELECT * FROM userPreference INNER JOIN serie ON id_serie=serie.id WHERE id_user = ?');
-            $visionnage_statement = $PDO->prepare('SELECT * FROM userWatch INNER JOIN serie ON id_serie=serie.id WHERE id_user = ?');
+            $visionnage_statement = $PDO->prepare('SELECT *, serie.titre s_titre, episode.titre e_titre FROM userWatch INNER JOIN serie ON id_serie=serie.id INNER JOIN episode ON userWatch.id_ep = episode.serie_id WHERE id_user = ?');
 
             $id_user = User::sessionUser()->id;
 
@@ -35,7 +35,8 @@ class HomeAction extends Action
             }
             $output .= '</ul>En cours : <ul>';
             while ($data=$visionnage_statement->fetch()) {
-                $output .= "<li><a href='?action=serie&id={$data['id_serie']}'>{$data['titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></a></li>";
+                $output .= "<li><a href='?action=episode&id={$data['id']}'>{$data['s_titre']}<br>
+                            Episode en cours : {$data['e_titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></a></li>";
             }
             $output .= '</ul>';
 
