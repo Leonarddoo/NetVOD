@@ -54,19 +54,7 @@ class AddUserAction extends Action
 </div>
 FORM;
                 }
-//<form method="post" action="?action=add-user">
-//    <label>Email :
-//        <input name="email" type="email">
-//    </label>
-//    <label>Mot de passe :
-//        <input name="passwd" type="password">
-//    </label>
-//    <label>Répéter le mot de passe :
-//        <input name="repeat" type="password">
-//    </label>
-//    <button name="submit">Inscription</button>
-//</form>
-//FORM;
+
                 break;
             case 'POST':
                 if ($_POST['passwd'] === $_POST['check-passwd']) {
