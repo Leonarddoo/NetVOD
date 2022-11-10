@@ -2,8 +2,6 @@
 
 namespace iutnc\netvod;
 
-use Exception;
-use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exception\InvalidPropertyNameException;
 
