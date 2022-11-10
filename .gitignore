@@ -3,3 +3,6 @@
 TD15/vendor/
 vendor/
 composer.phar
+
+TD15/
+*.ini
