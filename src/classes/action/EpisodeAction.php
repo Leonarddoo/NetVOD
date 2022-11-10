@@ -75,7 +75,7 @@ class EpisodeAction extends Action
                     }
 
                     $output .= '<h3>Ton commentaire sur la série : </h3><form method="post">';
-                    $output .= 'Note : ';
+                    $output .= 'Noter : ';
                     for ($i = 1; $i <= 5; $i++) {
                         $output .= "<label>$i</label><input type='radio' name='note' value='$i' required ";
                         if ($note === $i) {
