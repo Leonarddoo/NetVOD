@@ -37,12 +37,12 @@ class EpisodeAction extends Action
                     $output .= "<div> Durée: <p>{$episode['dur']} min</p></div>";
 
                     $id_user = User::sessionUser()->id;
-                    $ep = $episode['idse'];
+                    $serie = $episode['idse'];
 
-                    $watch_statement = $PDO->prepare('INSERT INTO userWatch VALUES (?, ?)');//TODO
+                    $watch_statement = $PDO->prepare('INSERT INTO userWatch VALUES (?, ?, :id_ep)');//TODO
 
                     $watch_statement->bindParam(1, $id_user);
-                    $watch_statement->bindParam(2, $ep);
+                    $watch_statement->bindParam(2, $serie);
 
                     try {
                         $watch_statement->execute();
