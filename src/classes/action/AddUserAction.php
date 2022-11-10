@@ -22,6 +22,25 @@ class AddUserAction extends Action
                     Utils::redirect();
                 } else {
                     $result .= <<<FORM
+<style>
+    body{
+        height: 100vh;
+        width: 100%;
+        background-image: url("img/bg.jpg");
+        position: relative;
+        isolation: isolate;
+        color: white;
+    }
+    
+    body::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        background-color: black;
+        opacity: .6;
+    }
+</style>
 <div class="box">
     <h3>S'enregister</h3>
     <form class="auth" method="post">
