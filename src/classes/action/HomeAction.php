@@ -19,7 +19,7 @@ class HomeAction extends Action
             $PDO = ConnectionFactory::makeConnection();
 
             $preference_statement = $PDO->prepare('SELECT * FROM userPreference INNER JOIN serie ON id_serie=serie.id WHERE id_user = ?');
-            $visionnage_statement = $PDO->prepare('SELECT *, serie.titre s_titre, episode.titre e_titre FROM userWatch INNER JOIN serie ON id_serie=serie.id INNER JOIN episode ON userWatch.id_ep = episode.serie_id WHERE id_user = ?');
+            $visionnage_statement = $PDO->prepare('SELECT *, serie.titre s_titre, episode.titre e_titre FROM userWatch INNER JOIN serie ON id_serie=serie.id INNER JOIN episode ON userWatch.id_ep = episode.id WHERE id_user = ?');
 
             $id_user = User::sessionUser()->id;
 
