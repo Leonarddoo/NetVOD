@@ -4,6 +4,7 @@ namespace iutnc\netvod\dispatch;
 
 use iutnc\netvod\action\AddUserAction;
 use iutnc\netvod\action\CatalogueAction;
+use iutnc\netvod\action\CommentaireAction;
 use iutnc\netvod\action\DefaultAction;
 use iutnc\netvod\action\EpisodeAction;
 use iutnc\netvod\action\DisconnectAction;
@@ -33,6 +34,7 @@ class Dispatcher
             'serie' => new SerieAction(),
             'episode' => new EpisodeAction(),
             'disconnect' => new DisconnectAction(),
+            'comments' => new CommentaireAction(),
             default => new DefaultAction()
         };
 

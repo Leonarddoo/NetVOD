@@ -86,7 +86,9 @@ class EpisodeAction extends Action
 
                     $output .= "<div><textarea name='commentaire'>$commentaire</textarea></div>";
 
-                    $output .= "<button type='submit'>Envoyer</button>";
+                    $text_button = $var ? 'Modifier le commentaire' : 'Envoyer';
+
+                    $output .= "<button type='submit'>$text_button</button>";
 
                     $output .= '</form>';
                 }
