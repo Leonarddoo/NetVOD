@@ -4,6 +4,7 @@ namespace iutnc\netvod\action;
 
 use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
+use iutnc\netvod\User;
 use iutnc\netvod\Utils;
 
 class SerieAction extends Action
@@ -69,8 +70,7 @@ class SerieAction extends Action
                         if ($_POST['like'] === 'true') {
                             $like_statement = $PDO->prepare('INSERT INTO userPreference VALUES (?, ?)');
 
-                            $user = unserialize($_SESSION['user']);
-                            $id_user = $user->id;
+                            $id_user = User::sessionUser()->id;
 
                             $like_statement->bindParam(1, $id_user);
                             $like_statement->bindParam(2, $id);

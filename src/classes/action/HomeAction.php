@@ -2,6 +2,8 @@
 
 namespace iutnc\netvod\action;
 
+use iutnc\netvod\db\ConnectionFactory;
+use iutnc\netvod\User;
 use iutnc\netvod\Utils;
 
 class HomeAction extends Action
@@ -11,8 +13,32 @@ class HomeAction extends Action
     {
         $output = '';
         if (isset($_SESSION['user'])) {
-            $output .= 'Connecté';
             $output .= Utils::linked_button('Déconnexion', 'disconnect');
+
+            $PDO = ConnectionFactory::makeConnection();
+
+            $preference_statement = $PDO->prepare('SELECT * FROM userPreference INNER JOIN serie ON id_serie=serie.id WHERE id_user = ?');
+            $visionnage_statement = $PDO->prepare('SELECT * FROM userWatch INNER JOIN serie ON id_serie=serie.id WHERE id_user = ?');
+
+            $id_user = User::sessionUser()->id;
+
+            $preference_statement->bindParam(1, $id_user);
+            $preference_statement->execute();
+
+            $visionnage_statement->bindParam(1, $id_user);
+            $visionnage_statement->execute();
+
+            $output .= '<ul>Préférences : ';
+            while ($data=$preference_statement->fetch()) {
+                $output .= "<li><a href='?action=serie&id={$data['id_serie']}'>{$data['titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></a></li>";
+            }
+            $output .= '</ul>En cours : <ul>';
+            while ($data=$visionnage_statement->fetch()) {
+                $output .= "<li><a href='?action=serie&id={$data['id_serie']}'>{$data['titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></a></li>";
+            }
+            $output .= '</ul>';
+
+            return $output;
         } else {
             $output .= <<<FORM
 <div class="box">
