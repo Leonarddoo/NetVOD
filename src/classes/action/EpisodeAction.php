@@ -39,7 +39,7 @@ class EpisodeAction extends Action
                     $id_user = User::sessionUser()->id;
                     $serie = $episode['idse'];
 
-                    $watch_statement = $PDO->prepare('INSERT INTO userWatch VALUES (?, ?, :id_ep)');//TODO
+                    $watch_statement = $PDO->prepare('INSERT INTO userWatch VALUES (?, ?)');
 
                     $watch_statement->bindParam(1, $id_user);
                     $watch_statement->bindParam(2, $serie);
