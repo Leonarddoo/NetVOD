@@ -16,7 +16,7 @@ class SerieAction extends Action
         if ($id = filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
             $PDO = ConnectionFactory::makeConnection();
 
-            $serie_statement = $PDO->prepare('SELECT serie.titre title, serie.descriptif sum, serie.annee year, serie.date_ajout date, count(episode.id) nb_ep FROM serie INNER JOIN episode on serie.id = episode.serie_id WHERE serie.id = ? GROUP BY serie.id, serie.titre');
+            $serie_statement = $PDO->prepare('SELECT serie.id idserie,serie.titre title, serie.descriptif sum, serie.annee year, serie.date_ajout date, count(episode.id) nb_ep FROM serie INNER JOIN episode on serie.id = episode.serie_id WHERE serie.id = ? GROUP BY serie.id, serie.titre');
             $serie_statement->bindParam(1, $id);
             $serie_statement->execute();
 
@@ -43,9 +43,43 @@ class SerieAction extends Action
                 $output .= "<div>Année de sortie : {$serie['year']}</div>";
                 $output .= "<div>Date d'ajout : {$serie['date']}</div>";
 
-                if ($connected = Auth::connected()) {
-//                    $output .= "<form method='post'><button type='submit' name='like' value='true'>Ajouter à mes préférences</button></form>";
-                    $output .= Utils::linked_button('Ajouter à mes préférences', 'true', 'post', 'like');
+                if (Auth::connected()) {
+                    if ($this->http_method === 'POST') {
+                        if (isset($_POST['like'])) {
+                            if ($_POST['like'] === 'true') {
+                                $like_statement = $PDO->prepare('INSERT INTO userPreference VALUES (?, ?)');
+
+                                $id_user = User::sessionUser()->id;
+
+                                $like_statement->bindParam(1, $id_user);
+                                $like_statement->bindParam(2, $id);
+
+                                $like_statement->execute();
+                            } else {
+                                $unlike_statement = $PDO->prepare('DELETE FROM userPreference WHERE id_user=? and id_serie=?;');
+
+                                $id_user = User::sessionUser()->id;
+
+                                $unlike_statement->bindParam(1, $id_user);
+                                $unlike_statement->bindParam(2, $id);
+
+                                $unlike_statement->execute();
+                            }
+
+                        }
+                    }
+
+                    $likecheck_statement = $PDO->prepare('SELECT count(*) size FROM userPreference WHERE id_user = ? and id_serie = ?');
+                    $id_user = User::sessionUser()->id;
+                    $likecheck_statement->bindParam(1, $id_user);
+                    $likecheck_statement->bindParam(2, $id);
+                    $likecheck_statement->execute();
+
+                    if ($likecheck_statement->fetch()['size'] === 0) {
+                        $output .= Utils::linked_button('Ajouter à mes préférences', 'true', 'post', 'like');
+                    } else {
+                        $output .= Utils::linked_button('Supprimer de mes préférences', 'false', 'post', 'like');
+                    }
                 }
 
                 $ep_statement = $PDO->prepare('SELECT e.id id, e.titre title, numero, duree, resume, e.img FROM serie INNER JOIN episode e on serie.id = e.serie_id WHERE serie.id = ? ORDER BY numero');
@@ -64,21 +98,6 @@ class SerieAction extends Action
                     $output .= '</a></li>';
                 }
                 $output .= '</ul>';
-
-                if ($this->http_method === 'POST' and $connected) {
-                    if (isset($_POST['like'])) {
-                        if ($_POST['like'] === 'true') {
-                            $like_statement = $PDO->prepare('INSERT INTO userPreference VALUES (?, ?)');
-
-                            $id_user = User::sessionUser()->id;
-
-                            $like_statement->bindParam(1, $id_user);
-                            $like_statement->bindParam(2, $id);
-
-                            $like_statement->execute();
-                        }
-                    }
-                }
             }
         }
         return $output;
