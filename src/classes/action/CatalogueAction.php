@@ -20,19 +20,26 @@ class CatalogueAction extends Action
         $statement = $PDO->prepare('SELECT id,titre,img FROM serie');
         $statement->execute();
 
-        $output .= '<ul>';
-        while ($data = $statement->fetch()) {
-            $output .= "<li><a href='?action=serie&id={$data['id']}'>{$data['titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></a></li>";
-        }
-        $output .= '</ul>';
+        $output .= <<<CATALOGUE
+<h3 class="catalogue-title">Catalogue</h3>
+<div class="catalogue">
+CATALOGUE;
 
-//                $ep_statement = $PDO->prepare('SELECT episode.titre ep_titre, s.titre s_titre FROM episode INNER JOIN serie s on episode.serie_id = s.id');
-//                $ep_statement->execute();
-//
-//                while ($data=$ep_statement->fetch()) {
-//                    $output .= "<div>Episode : {$data['ep_titre']}</div>";
-//                }
-//                break;
+        while ($data = $statement->fetch()) {
+            $output .= <<<CATALOGUE
+<a class="card" href="?action=serie&id={$data['id']}">
+    <div class="card-content">
+        <div class="image">
+            <img src='{$data['img']}' alt='Une image correspondant à la série'>
+        </div>
+        <div class="text">
+            <span class="title">{$data['titre']}</span>
+        </div>
+    </div>
+</a>
+CATALOGUE;
+        }
+        $output .= '</div>';
         return $output;
     }
 }

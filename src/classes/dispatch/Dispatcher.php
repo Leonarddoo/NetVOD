@@ -54,12 +54,27 @@ class Dispatcher
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../../style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
         <title>NetVOD</title>
+        <script src="https://kit.fontawesome.com/d15fb273b2.js" crossorigin="anonymous"></script>
     </head>
     <body>
+        <style>
+            body{
+                background-color: #1b1b1b;
+            }
+        </style>
         <header>
-            <a href="?"><img src="img/logo.png" alt="logo"></a>
+            <nav>
+                <a href="?"><img src="img/logo.png" alt="logo"></a>
+                <ul>
+                    <li><a href="?">Accueil</a></li>
+                    <li><a href="?action=catalogue">Catalogue</a></li>
+                    <li><a href="?action=profil">Profil</a></li>
+                    <li><a href="?action=disconnect">Déconnexion</a></li>
+                </ul>
+            </nav>
         </header>
         $html
     </body>

@@ -13,8 +13,8 @@ class HomeAction extends Action
     {
         $output = '';
         if (isset($_SESSION['user'])) {
-            $output .= Utils::linked_button('Catalogue', 'catalogue');
-            $output .= Utils::linked_button('Déconnexion', 'disconnect');
+//            $output .= Utils::linked_button('Catalogue', 'catalogue');
+//            $output .= Utils::linked_button('Déconnexion', 'disconnect');
 
             $PDO = ConnectionFactory::makeConnection();
 
@@ -29,16 +29,109 @@ class HomeAction extends Action
             $visionnage_statement->bindParam(1, $id_user);
             $visionnage_statement->execute();
 
-            $output .= 'Préférences : <ul>';
+            $output .= <<<LIKE
+<div class="title-slide">
+      <h3>Vos préférences</h3>
+    </div>
+
+    <section>
+        <div class="swiper favoris container">
+            <div class="swiper-wrapper content">
+LIKE;
+
             while ($data=$preference_statement->fetch()) {
-                $output .= "<li><a href='?action=serie&id={$data['id_serie']}'>{$data['titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></a></li>";
+                $output .= <<<LIKE
+<a class="swiper-slide card" href="?action=serie&id={$data['id_serie']}">
+    <div class="card-content">
+        <div class="image">
+            <img src='{$data['img']}' alt='Une image correspondant à la série'>
+        </div>
+<!--        <div class="icons">-->
+<!--            <i class="fa-solid fa-heart"></i>-->
+<!--        </div>-->
+
+        <div class="text">
+            <span class="title">{$data['titre']}</span>
+        </div>
+    </div>
+</a>
+LIKE;
             }
-            $output .= '</ul>En cours : <ul>';
+
+            $output .= <<<PROGRESS
+</div>
+        </div>
+
+        <div class="swiper-button-next favoris-next"></div>
+        <div class="swiper-button-prev favoris-prev"></div>
+    </section>
+
+    <div class="title-slide">
+        <h3>En cours</h3>
+    </div>
+
+    <section>
+        <div class="swiper enCours container">
+            <div class="swiper-wrapper content">
+PROGRESS;
+
             while ($data=$visionnage_statement->fetch()) {
-                $output .= "<li><a href='?action=episode&id={$data['id']}'>{$data['s_titre']}<br>
-                            Episode en cours : {$data['e_titre']}<img src='{$data['img']}' alt='Une image correspondant à la série'></a></li>";
+                $output .= <<<PROGRESS
+<a class="swiper-slide card" href="?action=episode&id={$data['id']}">
+    <div class="card-content">
+        <div class="image">
+            <img src='{$data['img']}' alt='Une image correspondant à la série'>
+        </div>
+<!--        <div class="icons">-->
+<!--            <i class="fa-solid fa-heart"></i>-->
+<!--        </div>-->
+
+        <div class="text">
+            <span class="title">{$data['s_titre']}<br>Episode en cours : {$data['e_titre']}</span>
+        </div>
+    </div>
+</a>
+PROGRESS;
             }
-            $output .= '</ul>';
+
+            $output .= <<<PROGRESS
+</div>
+    </div>
+
+    <div class="swiper-button-next enCours-next"></div>
+    <div class="swiper-button-prev enCours-prev"></div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    const favoris = new Swiper(".favoris", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        slidesPerGroup: 3,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        navigation: {
+            nextEl: ".favoris-next",
+            prevEl: ".favoris-prev",
+        },
+    });
+
+    const enCours = new Swiper(".enCours", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        slidesPerGroup: 3,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        navigation: {
+            nextEl: ".enCours-next",
+            prevEl: ".enCours-prev",
+        },
+    });
+</script>
+PROGRESS;
 
             return $output;
         } else {
