@@ -44,8 +44,6 @@ class SerieAction extends Action
                 $output .= "<div>Année de sortie : {$serie['year']}</div>";
                 $output .= "<div>Date d'ajout : {$serie['date']}</div>";
 
-                $comments = '';
-
                 if (Auth::connected()) {
                     if ($this->http_method === 'POST') {
                         if (isset($_POST['like'])) {
@@ -78,11 +76,15 @@ class SerieAction extends Action
                     $likecheck_statement->bindParam(2, $id_serie);
                     $likecheck_statement->execute();
 
+                    $output .= '<div>';
+
                     if ($likecheck_statement->fetch()['size'] === 0) {
                         $output .= Utils::linked_button('Ajouter à mes préférences', 'true', 'post', 'like');
                     } else {
                         $output .= Utils::linked_button('Supprimer de mes préférences', 'false', 'post', 'like');
                     }
+
+                    $output .= '</div>';
                 }
 
                 $output .= '<h2>Liste des épisodes : </h2>';

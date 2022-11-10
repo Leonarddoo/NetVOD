@@ -26,7 +26,7 @@ class CommentaireAction extends Action
                 $output .= "<h4>Commentaire : </h4><p>{$data['commentaire']}</p>";
                 $output .= "<strong>Note : </strong>{$data['note']}/5";
 
-                $output .= '</div>';
+                $output .= '</div><br>';
             }
         }
 
